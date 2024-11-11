@@ -22,5 +22,5 @@ int count_y(char *buffer)
             counter++;
         i++;
     }
-    return counter;
+    return counter - 1;
 }

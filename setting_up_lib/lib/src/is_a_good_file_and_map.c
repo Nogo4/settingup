@@ -6,6 +6,7 @@
 */
 
 #include "../../../lib/include/my.h"
+#include "../include/lib_setting_up.h"
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -35,7 +36,7 @@ int is_valid_map(char *buffer)
     int y_height = count_y(buffer);
     int i_skip = skip_height(buffer);
     int width = count_x(buffer, i_skip);
-    int real_size = my_strlen(buffer) - y_height - 1;
+    int real_size = my_strlen(buffer) - y_height - 2;
     int good_size = width * y_height;
 
     if (height_given_by_file != y_height)

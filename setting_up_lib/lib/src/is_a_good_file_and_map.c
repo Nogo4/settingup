@@ -36,7 +36,7 @@ int is_valid_map(char *buffer)
     int y_height = count_y(buffer);
     int i_skip = skip_height(buffer);
     int width = count_x(buffer, i_skip);
-    int real_size = my_strlen(buffer) - y_height - 2;
+    int real_size = my_strlen(buffer) - y_height - i_skip;
     int good_size = width * y_height;
 
     if (height_given_by_file != y_height)

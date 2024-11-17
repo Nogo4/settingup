@@ -1,0 +1,11 @@
+unit
+prog
+*.gcda
+*.gcno
+libmy.a
+*.o
+coverage
+.vscode
+lib_my_ls_.a
+my_lib.a
+*.a

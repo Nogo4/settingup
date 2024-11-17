@@ -33,7 +33,7 @@ int setting_up(int argc, char **argv)
     buffer[buf_struct.st_size] = '\0';
     close(fd);
     if (test_is_valid_file(test_buf) == 1 || is_valid_map(buffer) == 1) {
-        my_printf("Error file");
+        my_printf("Error file\n");
         return 84;
     }
     //create_map_xy(buffer);

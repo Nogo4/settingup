@@ -22,13 +22,14 @@ char **case_height_equal_one(char **map)
             map[0][i] = 'x';
             return map;
         }
+        i++;
     }
     return map;
 }
 
 int special_case(char **map, int height)
 {
-    if (height == 1) {
+    if (height + 1 == 1) {
         map = case_height_equal_one(map);
         my_printf("%s\n", map[0]);
         return 1;

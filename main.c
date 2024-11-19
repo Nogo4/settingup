@@ -13,15 +13,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-void create_map_xy(char *buffer)
-{
-    int i = skip_height(buffer);
-    int y_size = count_y(buffer);
-    char **map = malloc(sizeof(char) * (my_strlen(buffer) - i));
-
-    is_valid_map(buffer);
-}
-
 int setting_up(int argc, char **argv)
 {
     int fd = open(argv[1], O_RDONLY);
@@ -36,7 +27,7 @@ int setting_up(int argc, char **argv)
         my_printf("Error file\n");
         return 84;
     }
-    //create_map_xy(buffer);
+    find_biggest_square(buffer, my_getnbr(buffer) - 1);
     free(buffer);
     return 0;
 }

@@ -94,6 +94,6 @@ clean:
 	rm -f src/utils/*.gcno
 
 fclean:	clean
-	rm $(NAME)
+	rm -f $(NAME)
 
 re: fclean $(NAME)

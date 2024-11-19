@@ -11,7 +11,7 @@ OBJ = $(SRC:.c=.o)
 
 NAME = setting_up
 
-CFLAGS += -Ilib/include
+CFLAGS += -Ilib/include -g3
 
 LIB =	setting_up_lib/lib_setting_up.a \
 		lib/libmy.a \
@@ -30,6 +30,8 @@ clean:
 
 fclean:	clean
 	rm -f $(NAME)
+	make fclean -C lib
+	make fclean -C setting_up_lib
 
 re: fclean $(NAME)
 

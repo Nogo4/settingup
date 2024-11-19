@@ -1,6 +1,6 @@
 5
-o.o.o.
-ooo...
-.d...oo
-....oo
-....oo
+o.o.o.oo
+ooo...oo
+.....ooo
+.....ooo
+.....ooo

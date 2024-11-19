@@ -9,3 +9,4 @@ coverage
 lib_my_ls_.a
 my_lib.a
 *.a
+*.pl

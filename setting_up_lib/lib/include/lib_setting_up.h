@@ -17,5 +17,6 @@ int is_valid_map(char *buffer);
 int my_argc(char **av);
 char **my_str_to_word_array(char *str);
 void find_biggest_square(char *buffer, int height);
+int special_case(char **map, int height);
 
 #endif

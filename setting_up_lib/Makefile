@@ -12,6 +12,7 @@ SRC =  lib/src/count_x.c \
 	   lib/src/my_argc.c \
 	   lib/src/my_str_to_word_array.c \
 	   lib/setting_up_basic.c \
+	   lib/src/special_case.c \
 
 OBJ = $(SRC:.c=.o)
 

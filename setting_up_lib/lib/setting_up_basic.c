@@ -80,9 +80,11 @@ void find_biggest_square(char *buffer, int height)
 {
     char **map_x_y = my_str_to_word_array(buffer);
     int pos_bsq[] = {0, 0};
-    int square = pos_biggest_square(map_x_y, pos_bsq, height);
+    int square = 0;
 
-    my_printf("%d\n", square);
+    if (special_case(map_x_y, height) == 1)
+        return;
+    square = pos_biggest_square(map_x_y, pos_bsq, height);
     map_x_y = edit_map_with_bsq(pos_bsq[0], pos_bsq[1], square, map_x_y);
     for (int i = 0; i <= height; i++)
         my_printf("%s\n", map_x_y[i]);

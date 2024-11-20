@@ -18,5 +18,6 @@ int my_argc(char **av);
 char **my_str_to_word_array(char *str);
 void find_biggest_square(char *buffer, int height);
 int special_case(char **map, int height);
+int is_an_empty_file(char *buffer);
 
 #endif

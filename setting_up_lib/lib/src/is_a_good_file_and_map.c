@@ -32,18 +32,36 @@ int search_if_get_char_wrong(char *buffer, int i)
 
 int is_valid_map(char *buffer)
 {
-    int height_given_by_file = my_getnbr(buffer);
     int y_height = count_y(buffer);
     int i_skip = skip_height(buffer);
     int width = count_x(buffer, i_skip);
     int real_size = my_strlen(buffer) - y_height - i_skip;
     int good_size = width * y_height;
+    int height_given_by_file = my_getnbr(buffer);
 
     if (height_given_by_file != y_height)
         return 1;
     if (search_if_get_char_wrong(buffer, i_skip) == 1)
         return 1;
     if (good_size != real_size)
+        return 1;
+    return 0;
+}
+
+int is_an_empty_file(char *buffer)
+{
+    int height = my_getnbr(buffer);
+    int i = 0;
+
+    if (height < 0)
+        return 1;
+    while (buffer[i] != '\0') {
+        i++;
+    }
+    i--;
+    if (buffer[i] != '\n')
+        return 1;
+    if (buffer[i - 1] != '.' && buffer[i - 1] != 'o')
         return 1;
     return 0;
 }

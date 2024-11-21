@@ -10,13 +10,14 @@
 
 int my_strdup(char const *src, char *dest)
 {
-    char *result = NULL;
-    int i;
+    int i = 0;
 
     if (dest == NULL)
         return 0;
-    for (i = 0; src[i] != '\0'; i++)
+    while (src[i] != '\0') {
         dest[i] = src[i];
+        i++;
+    }
     dest[i] = '\0';
     return 1;
 }

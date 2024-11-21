@@ -76,17 +76,50 @@ char **edit_map_with_bsq(int y, int x, int square, char **map)
     return map;
 }
 
-void find_biggest_square(char *buffer, int height)
+static void write_with_generated_map(int height, char **map)
+{
+    int i = 0;
+    char back_line = '\n';
+
+    for (; i != height; i++) {
+            write(1, map[i], my_strlen(map[i]));
+            write(1, &back_line, 1);
+    }
+    write(1, map[i], my_strlen(map[i]));
+}
+
+static void free_all(char **map)
+{
+    int i = 0;
+
+    while (map[i] != NULL) {
+        free(map[i]);
+        i++;
+    }
+    free(map);
+}
+
+void find_biggest_square(char *buffer, int height,
+    int generated_map)
 {
     char **map_x_y = my_str_to_word_array(buffer);
     int pos_bsq[] = {0, 0};
     int square = 0;
+    char back_line = '\n';
 
     if (special_case(map_x_y, height) == 1)
         return;
     square = pos_biggest_square(map_x_y, pos_bsq, height);
     map_x_y = edit_map_with_bsq(pos_bsq[0], pos_bsq[1], square, map_x_y);
-    for (int i = 0; i <= height; i++)
-        my_printf("%s\n", map_x_y[i]);
-    free(map_x_y);
+    if (generated_map == 0) {
+        for (int i = 0; i <= height; i++) {
+            write(1, map_x_y[i], my_strlen(map_x_y[i] + 1));
+            write(1, &back_line, 1);
+        }
+    }
+    if (generated_map == 1) {
+        write_with_generated_map(height, map_x_y);
+        free(buffer);
+    }
+    free_all(map_x_y);
 }

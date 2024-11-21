@@ -31,29 +31,58 @@ int dont_need_to_generate(int argc, char **argv)
         my_printf("Error file\n");
         return 84;
     }
-    find_biggest_square(buffer, my_getnbr(buffer) - 1);
+    find_biggest_square(buffer, my_getnbr(buffer) - 1, 0);
     free(buffer);
     return 0;
 }
 
-int generate_map(char **argv)
+void write_line(char **argv, char *str, int *i3, int len)
 {
-    int len = my_getnbr(argv[1]) + 1;
-    char *str = NULL;
+    for (int i2 = 0; i2 != len; i2++) {
+        str[i3[0]] = argv[2][i3[1]];
+        i3[0] += 1;
+        i3[1] += 1;
+        if (argv[2][i3[1]] == '\0')
+            i3[1] = 0;
+    }
+}
 
-    if (len <= 0)
+void generate_str_map(int len, char **argv, char *str)
+{
+    int i = 0;
+    int i3[] = {0, 0};
+    int len_str;
+
+    for (i; i != len; i++) {
+        write_line(argv, str, i3, len);
+        str[i3[0]] = '\n';
+        i3[0] += 1;
+    }
+    str[i3[0]] = '\0';
+    find_biggest_square(str, len, 1);
+}
+
+static int generate_map(char **argv)
+{
+    int len = my_getnbr(argv[1]);
+    char *str = NULL;
+    int len_pattern = 0;
+
+    if (check_error_generator(argv, len) == 1) {
+        my_printf("Error generating\n");
         return 84;
+    }
+    len_pattern = my_strlen(argv[2]);
+    str = malloc(sizeof(char) * ((len + 1) * (len + 1) + 1));
+    generate_str_map(len, argv, str);
 }
 
 int setting_up(int argc, char **argv)
 {
     if (argc == 2)
         return dont_need_to_generate(argc, argv);
-    if (argc == 3) {
-        if (generate_map(argv) == 84)
-            return 84;
-        return 0;
-    }
+    if (argc == 3 && generate_map(argv) != 84)
+            return 0;
     return 84;
 }
 

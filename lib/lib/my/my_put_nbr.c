@@ -6,52 +6,76 @@
 */
 
 #include "../../include/my.h"
+#include <unistd.h>
 
-int the_small_int(int nb)
+static int how_many_digit(int power)
 {
-    if (nb == -2147483648) {
-        my_putchar('-');
-        my_putchar('2');
-        my_putchar('1');
-        my_putchar('4');
-        my_putchar('7');
-        my_putchar('4');
-        my_putchar('8');
-        my_putchar('3');
-        my_putchar('6');
-        my_putchar('4');
-        my_putchar('8');
-        return 1;
+    int exp = 1;
+
+    while (power > 10) {
+        power /= 10;
+        exp++;
+    }
+    return exp;
+}
+
+int upper_ten(int nb)
+{
+    long int power = 10;
+    int rest = 0;
+    int i = 1;
+
+    while (power <= nb) {
+        power = power * 10;
+        i++;
+    }
+    power /= 10;
+    while (i != 0) {
+        rest = nb % power;
+        nb /= power;
+        my_putchar(48 + nb);
+        nb = rest;
+        power /= 10;
+        i--;
     }
     return 0;
 }
 
-void check_negative_number(int *nb)
+int under_ten(int nb)
 {
-    *nb *= -1;
-    my_putchar('-');
+    if (nb < 0) {
+        nb = nb * (-1);
+        my_putchar('-');
+    }
+    my_putchar(48 + nb);
+    return 0;
+}
+
+int is_neg(int nb)
+{
+    if (nb == -2147483648) {
+        nb = (nb * -1) / 10;
+        my_putchar('-');
+        upper_ten(nb);
+        my_putchar('8');
+    } else {
+        nb *= -1;
+        my_putchar('-');
+        upper_ten(nb);
+    }
+    return 0;
 }
 
 int my_put_nbr(int nb)
 {
-    int divider = 1;
-    int counter_digits = 1;
-    int return_nb_digit;
-
-    if (the_small_int(nb) == 0) {
-        if (nb < 0)
-            check_negative_number(&nb);
-        while (divider <= (nb / 10)) {
-            counter_digits++;
-            return_nb_digit = counter_digits;
-            divider *= 10;
-        }
-        while (counter_digits > 0) {
-            my_putchar(nb / divider + 48);
-            nb %= divider;
-            counter_digits--;
-            divider /= 10;
-        }
+    if (nb > 9) {
+        upper_ten(nb);
     }
-    return return_nb_digit;
+    if (nb <= 9 && nb >= 0) {
+        under_ten(nb);
+    }
+    if (nb < 0) {
+        is_neg(nb);
+    }
+    return how_many_digit(nb);
 }

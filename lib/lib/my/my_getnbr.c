@@ -5,86 +5,46 @@
 ** task05
 */
 
-#include "../../include/my.h"
-#include <stdio.h>
-
-int check_minus_and_size_number(int result, int minus, int size_nb)
+int test_ascii_code(const char *the_str, int i_fa, long *nbr_fa, int testor_a)
 {
-    if ((result < -2147483648) || (result > 2147483647) || size_nb > 11)
-        return 0;
-    if (minus)
-        return -(int)result;
-    return (int)result;
-}
-
-int determine_sign_number(int minus)
-{
-    int k = 0;
-    int p;
-
-    if (minus > 0) {
-        k = -1;
-        for (p = 0; p <= minus; p++)
-            k *= -1;
+    if (the_str[i_fa] >= '0' && the_str[i_fa] <= '9') {
+        *nbr_fa = (*nbr_fa * 10) + the_str[i_fa] - 48;
+        if (the_str[i_fa + 1] > 58 || the_str[i_fa + 1] < 48) {
+            return 1;
+        }
     }
-    if (k < 0)
-        minus = 1;
-    else
-        minus = 0;
-    return minus;
+    return 0;
 }
 
-long long get_result(int size_str, char const *str, int i)
+int final_test(long nbr_ft, int final_nbr_ft)
 {
-    int e;
-    long long result = 0;
-
-    for (e = 0; e <= size_str; e++) {
-        result += (str[i] - '0') * my_compute_power_rec(10, size_str - e - 1);
-        i++;
-    }
-    return result;
-}
-
-void analyse_str(int **arr, char const *str, int *minus)
-{
-    for (*arr[3] = 0; str[*arr[3]] > '\0'; *arr[3] += 1) {
-        if (str[*arr[3]] == '-' && *arr[0] <= 0) {
-            *minus += 1;
-            continue;
-        }
-        if (str[*arr[3]] == '+' && *arr[0] <= 0)
-            continue;
-        if (str[*arr[3]] >= '0' && str[*arr[3]] <= '9' && *arr[0] <= 0) {
-            *arr[0] = 1;
-            *arr[1] = *arr[3];
-            continue;
-        }
-        if ((str[*arr[3]] < '0' || str[*arr[3]] > '9') && *arr[0] > 0) {
-            *arr[2] = *arr[3];
-            break;
-        }
+    if (nbr_ft > 2147483647 || nbr_ft < -2147483648) {
+        final_nbr_ft = 0;
+        return final_nbr_ft;
+    } else {
+        final_nbr_ft = nbr_ft;
+        return final_nbr_ft;
     }
 }
 
 int my_getnbr(char const *str)
 {
-    int minus = 0;
-    int first_number_check = 0;
-    int first_number_index = 0;
-    int end_index = 0;
-    int size_str = 0;
-    int *first_nb_check_and_index[] = {&first_number_check,
-        &first_number_index,
-        &end_index,
-        &size_str};
-    long long result = 0;
+    int i = 0;
+    int i_negative = 0;
+    int testor = 0;
+    long nbr = 0;
+    int final_nbr = 0;
+    int zebi = 0;
 
-    analyse_str(first_nb_check_and_index, str, &minus);
-    if (!first_number_check)
-        return -1;
-    minus = determine_sign_number(minus);
-    size_str -= first_number_index;
-    result = get_result(size_str, str, first_number_index);
-    return check_minus_and_size_number(result, minus, size_str);
+    while (str[i] != '\0' && testor == 0) {
+        if (str[i] == '-') {
+            i_negative++;
+        }
+        testor = test_ascii_code(str, i, &nbr, testor);
+        i++;
+    }
+    if (i_negative % 2 != 0) {
+        nbr = nbr * (-1);
+    }
+    return final_test(nbr, final_nbr);
 }

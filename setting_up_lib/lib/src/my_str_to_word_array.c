@@ -49,10 +49,9 @@ static int word_length(char *str, int i)
     return counter;
 }
 
-static char *fill_str(char *str, int i, int length)
+static char *fill_str(char *str, int i, char *fill_str)
 {
     int i_str = 0;
-    char *fill_str = malloc(sizeof(char) * length + 1);
 
     while (is_alpha(str[i]) != 1 && str[i] != '\0') {
         fill_str[i_str] = str[i];
@@ -82,7 +81,7 @@ char **my_str_to_word_array(char *str)
         i = skip_separate(str, i);
         lenght_word = word_length(str, i);
         word_array[i_lign] = malloc(sizeof(char) * lenght_word + 1);
-        word_array[i_lign] = fill_str(str, i, lenght_word);
+        fill_str(str, i, word_array[i_lign]);
         i = skip_word(str, i);
     }
     word_array[i_lign] = NULL;

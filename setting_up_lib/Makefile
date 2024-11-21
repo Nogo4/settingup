@@ -2,7 +2,7 @@
 ## EPITECH PROJECT, 2024
 ## Makefile
 ## File description:
-## Makefile for seeting up project
+## Makefile for setting up project
 ##
 
 SRC =  lib/src/count_x.c \

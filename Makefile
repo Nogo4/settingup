@@ -2,7 +2,7 @@
 ## EPITECH PROJECT, 2024
 ## Makefile
 ## File description:
-## Makefile for bootstrap my_ls
+## Makefile for setting up
 ##
 
 SRC = main.c
@@ -11,7 +11,7 @@ OBJ = $(SRC:.c=.o)
 
 NAME = setting_up
 
-CFLAGS += -Ilib/include -g3
+CFLAGS += -Ilib/include
 
 LIB =	setting_up_lib/lib_setting_up.a \
 		lib/libmy.a \

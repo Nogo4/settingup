@@ -53,7 +53,7 @@ int is_an_empty_file(char *buffer)
     int height = my_getnbr(buffer);
     int i = 0;
 
-    if (height < 0)
+    if (height <= 0)
         return 1;
     while (buffer[i] != '\0') {
         i++;

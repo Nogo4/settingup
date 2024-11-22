@@ -11,7 +11,8 @@ int my_argc(char **av)
 {
     int i = 0;
 
-    while (av[i] != NULL)
+    while (av[i] != NULL) {
         i++;
+    }
     return i;
 }

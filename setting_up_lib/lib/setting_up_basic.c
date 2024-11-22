@@ -50,7 +50,7 @@ static int check_full_size(char **map, int y, int square)
     return 0;
 }
 
-int pos_biggest_square(char **map, int *pos_bsq, int height)
+int pos_biggest_square(char **map, int *pos_bsq, int height, int is_generated)
 {
     int vector[] = {0, 0};
     int square = 0;
@@ -58,7 +58,7 @@ int pos_biggest_square(char **map, int *pos_bsq, int height)
 
     while (vector[0] != height) {
         clone_square = square;
-        if (check_full_size(map, vector[0], square) == 1)
+        if (is_generated == 1 && check_full_size(map, vector[0], square) == 1)
             return square;
         square = value_of_square(map, vector[1], vector[0], square);
         if (square > clone_square) {
@@ -119,7 +119,7 @@ void find_biggest_square(char *buffer, int height,
 
     if (special_case(map_x_y, height) == 1)
         return;
-    square = pos_biggest_square(map_x_y, pos_bsq, height);
+    square = pos_biggest_square(map_x_y, pos_bsq, height, generated_map);
     map_x_y = edit_map_with_bsq(pos_bsq[0], pos_bsq[1], square, map_x_y);
     if (generated_map == 0) {
         for (int i = 0; i <= height; i++) {

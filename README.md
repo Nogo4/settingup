@@ -42,3 +42,9 @@ Here are some example outputs:
 ![Generated Map](img/with_gen.png)
 
 ---
+
+🏆 Achieved 97.5% in Marvin's automated tests.
+
+---
+
+

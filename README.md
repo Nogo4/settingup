@@ -8,6 +8,7 @@ If no map is provided, the program can generate a random one based on a given si
 
 - `.` (dot) represents free spaces
 - `o` (letter o) represents obstacles
+- `x` represents square
 
 ---
 
